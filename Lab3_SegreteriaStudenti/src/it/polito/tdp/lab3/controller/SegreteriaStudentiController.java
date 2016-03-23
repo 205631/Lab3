@@ -77,6 +77,34 @@ public class SegreteriaStudentiController {
     		txtResult.setText(st);
     		return;
     	}
+    	//implemento metodo di ricerca dei corsi frequentati da uno studente
+    	//controllo matricola se presente nel db e che il corso non sia selezionato
+    	//e stampo la lista di corsi frequentati
+    	String matr=txtMatricola.getText();
+    	if(c==null && matr.compareTo("")!=0){
+    		Studente s=model.cercaStudente(matr);
+    		if(s==null){
+    			txtResult.setText("Studente inesistente");
+    			return;
+    		}else{
+    			//chiamo funzione model per stampare lista corsi frequentati dallo studente
+    			List<Corso> l=model.listaCorsiFrequentati(s);
+        		if(l==null){
+        			txtResult.setText("Nessun corso frequentato dallo studente");
+        			return;
+        		}
+        		String st="";
+        		for(Corso cc:l){
+        			st+=cc.toString()+"\n";
+        		}
+        		txtResult.setText(st);
+        		return;
+    			
+    		}
+    	}else{
+    		txtResult.setText("ERRORE: eliminare campo 'Matricola' o campo 'Corso'");
+    		return;
+    	}
     	
     	
     }

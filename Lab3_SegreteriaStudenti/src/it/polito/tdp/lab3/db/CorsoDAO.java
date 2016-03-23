@@ -34,7 +34,7 @@ public class CorsoDAO {
 			}
 			res.close();
 			conn.close();
-			c.add(0,new Corso("",-1,"---ELENCO CORSI---",""));
+			c.add(0,new Corso("",-1,"---ELENCO STUDENTI---",""));
 			return c;
 
 		} catch (SQLException e) {

@@ -33,7 +33,7 @@ public class Corso {
 
 	@Override
 	public String toString() {
-		return this.nomeCorso;
+		return codiceCorso+" "+crediti+" "+nomeCorso+" pd:"+pD;
 	}
 	
 	

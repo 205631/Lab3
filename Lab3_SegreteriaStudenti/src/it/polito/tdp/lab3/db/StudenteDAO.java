@@ -70,5 +70,31 @@ public class StudenteDAO {
 		return null;
 		
 	}
+
+	public List<Corso> listaCorsiFrequentati(Studente s){
+		
+		List<Corso> l= new ArrayList<Corso>();
+		
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+
+			Statement st = conn.createStatement();
+			String sql="select C.codins,C.crediti,C.nome,C.pd from studente S,corso C, iscrizione I where S.matricola=I.matricola and C.codins=I.codins and I.matricola='"+s.getMatricola()+"'";
+						
+			ResultSet res = st.executeQuery(sql);
+			
+			while(res.next()){
+				Corso c=new Corso(res.getString("codins"),res.getInt("crediti"),res.getString("nome"),res.getString("pd"));
+				l.add(c);
+			}
+			return l;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	
 }
