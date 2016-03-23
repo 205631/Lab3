@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.lab3.model.Corso;
 import it.polito.tdp.lab3.model.SegreteriaStudentiModel;
+import it.polito.tdp.lab3.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,7 +64,22 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doCompletamentoAuto(ActionEvent event) {
-
+    	//preme la spunta
+    	String s=txtMatricola.getText();
+    	
+    	if(s.compareTo("")==0){
+    		txtResult.setText("ERRORE: Campo matricola vuoto");
+    		return;
+    	}else{
+    		Studente st=model.cercaStudente(s);
+    		if(st==null){
+    			txtResult.setText("Studente assente");
+    			return;
+    		}
+    		txtNome.setText(st.getNome());
+    		txtCognome.setText(st.getCognome());
+    	}
+    	
     }
 
     @FXML
@@ -73,7 +89,12 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	cmbCorso.setValue(null);
+    	txtMatricola.setText("");
+    	txtNome.setText("");
+    	txtCognome.setText("");
+    	txtResult.setText("");
+    	btmSpunta.setDisable(false);
     }
 
     @FXML
