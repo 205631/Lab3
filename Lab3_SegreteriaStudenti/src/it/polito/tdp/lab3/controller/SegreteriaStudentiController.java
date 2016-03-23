@@ -23,6 +23,7 @@ public class SegreteriaStudentiController {
 		this.model = model;
 		
 		cmbCorso.getItems().addAll(model.popolaTendina());
+		
 	}
 
 	@FXML
@@ -81,6 +82,7 @@ public class SegreteriaStudentiController {
     	//controllo matricola se presente nel db e che il corso non sia selezionato
     	//e stampo la lista di corsi frequentati
     	String matr=txtMatricola.getText();
+    	
     	if(c==null && matr.compareTo("")!=0){
     		Studente s=model.cercaStudente(matr);
     		if(s==null){
@@ -102,8 +104,25 @@ public class SegreteriaStudentiController {
     			
     		}
     	}else{
-    		txtResult.setText("ERRORE: eliminare campo 'Matricola' o campo 'Corso'");
-    		return;
+    		// implementare punto 2.5 dato matricola e corso verificare se lo studente frequentq
+    		//il corso e stampare un messaggio
+    		
+    		//1) controllare se esiste lo studente
+    		Studente s=model.cercaStudente(matr);
+    		
+    		if(s==null){
+    			txtResult.setText("Studente inesistente");
+    			return;
+    		}else{
+        		//2)controllare se frequenta il corso tramite metodo del model
+    			if(model.frequentaCorso(s, c)==true){
+    				txtResult.setText(s.getNome()+" "+s.getCognome()+" ("+s.getMatricola()+") "+"e' iscritto al corso \""+c.getNomeCorso()+"\"");
+    				return;
+    			}else{
+    				txtResult.setText(s.getNome()+" "+s.getCognome()+" ("+s.getMatricola()+") "+"non e' iscritto al corso \""+c.getNomeCorso()+"\"");
+    				return;
+    			}
+    		}
     	}
     	
     	

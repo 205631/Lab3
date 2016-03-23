@@ -96,5 +96,29 @@ public class StudenteDAO {
 		return null;
 		
 	}
+
+	public boolean frequentaCorso(Studente s,Corso c){
+		boolean ris=false;
+		
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+
+			Statement st = conn.createStatement();
+			String sql="select C.codins,C.crediti,C.nome,C.pd from studente S,corso C, iscrizione I where S.matricola=I.matricola and C.codins=I.codins and I.matricola='"+s.getMatricola()+"' and I.codins='"+c.getCodiceCorso()+"'";
+						
+			ResultSet res = st.executeQuery(sql);
+
+			if(res.next()){
+				ris=true;
+			}
+			return ris;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ris;
+		
+	}
 	
 }

@@ -28,5 +28,10 @@ public class SegreteriaStudentiModel {
 		StudenteDAO sd=new StudenteDAO();
 		return sd.listaCorsiFrequentati(s);
 	}
+
+	public boolean frequentaCorso(Studente s,Corso c){
+		StudenteDAO sd=new StudenteDAO();
+		return sd.frequentaCorso(s, c);
+	}
 	
 }
