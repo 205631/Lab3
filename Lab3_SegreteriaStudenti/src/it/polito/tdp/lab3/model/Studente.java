@@ -29,6 +29,11 @@ public class Studente {
 	public String getCds() {
 		return cds;
 	}
+
+	@Override
+	public String toString() {
+		return matricola+" "+nome+" "+cognome+" "+cds;
+	}
 	
 
 }

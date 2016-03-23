@@ -1,6 +1,7 @@
 package it.polito.tdp.lab3.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.lab3.model.Corso;
@@ -59,7 +60,25 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doCerca(ActionEvent event) {
-
+    	//metodo per ricerca studenti iscritti ad un corso
+    	//controllo che il campo matricola sia vuoto e che ci sia un corso scelto
+    	Corso c=cmbCorso.getValue();
+    	
+    	if(c!=null && txtMatricola.getText().compareTo("")==0){
+    		List<Studente> l=model.listaStudentiIscritti(c);
+    		if(l==null){
+    			txtResult.setText("Nessuno studente iscritto al corso");
+    			return;
+    		}
+    		String st="";
+    		for(Studente s:l){
+    			st+=s.toString()+"\n";
+    		}
+    		txtResult.setText(st);
+    		return;
+    	}
+    	
+    	
     }
 
     @FXML
@@ -84,7 +103,7 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
-
+    	
     }
 
     @FXML
