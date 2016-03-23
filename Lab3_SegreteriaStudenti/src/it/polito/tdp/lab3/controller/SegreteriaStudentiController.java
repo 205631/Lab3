@@ -19,6 +19,7 @@ public class SegreteriaStudentiController {
 	
     public void setModel(SegreteriaStudentiModel model) {
 		this.model = model;
+		
 		cmbCorso.getItems().addAll(model.popolaTendina());
 	}
 
