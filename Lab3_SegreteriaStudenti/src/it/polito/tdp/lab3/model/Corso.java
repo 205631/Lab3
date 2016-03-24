@@ -33,6 +33,10 @@ public class Corso {
 
 	@Override
 	public String toString() {
+		return nomeCorso;
+	}
+	
+	public String stampaCorso(){
 		return codiceCorso+" "+crediti+" "+nomeCorso+" pd:"+pD;
 	}
 	

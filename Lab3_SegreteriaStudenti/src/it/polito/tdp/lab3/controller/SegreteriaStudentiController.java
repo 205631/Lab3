@@ -97,7 +97,7 @@ public class SegreteriaStudentiController {
         		}
         		String st="";
         		for(Corso cc:l){
-        			st+=cc.toString()+"\n";
+        			st+=cc.stampaCorso()+"\n";
         		}
         		txtResult.setText(st);
         		return;
