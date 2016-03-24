@@ -150,6 +150,37 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
+    	//1) controllare se i campi sono inseriti
+    	String matr=txtMatricola.getText();
+    	if(cmbCorso.getValue()==null || matr.compareTo("")==0){
+    		txtResult.setText("ERRORE: Inserire Matricola e Corso");
+    		return;
+    	}else{
+    		//2) controllare se lo studente esiste
+    		Studente s=model.cercaStudente(matr);
+    		Corso c=cmbCorso.getValue();
+    		
+    		if(s==null){
+    			txtResult.setText("Studente inesistente");
+    			return;
+    		}
+    		//3) controllare se lo studente e' gia' iscritto al corso
+    		if(model.frequentaCorso(s, c)==true){
+    			txtResult.setText(s.getNome()+" "+s.getCognome()+" ("+s.getMatricola()+") "+"e' gia' iscritto al corso \""+c.getNomeCorso()+"\"");
+    			return;
+    		}else{
+    			//4) iscrivere studente al corso
+    			if(model.iscriviStudente(s, c)){
+    				txtResult.setText(s.getNome()+" "+s.getCognome()+" ("+s.getMatricola()+") "+"e' stato iscritto al corso \""+c.getNomeCorso()+"\"");
+    				return;
+    			}
+    			
+    		}
+    		
+    		
+    	}
+    	
+    	
     	
     }
 

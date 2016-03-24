@@ -120,5 +120,30 @@ public class StudenteDAO {
 		return ris;
 		
 	}
+
+	public boolean iscriviStudente(Studente s,Corso c){
+		
+		boolean ris=false;
+		
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL);
+
+			Statement st = conn.createStatement();
+			String sql="INSERT INTO `iscritticorsi`.`iscrizione` (`matricola`, `codins`) VALUES ("+s.getMatricola()+", '"+c.getCodiceCorso()+"');";
+						
+			int i= st.executeUpdate(sql);
+
+			if(i==1){
+				ris=true;
+			}
+			return ris;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ris;
+		
+	}
 	
 }
